@@ -14,4 +14,6 @@ site should be available on `http://localhost`
 
 See video for instructions how the setup works:
 
-[react scorm connection project](https://www.youtube.com/watch?v=aIRJFO6MpxA).
+[![scorm no LMS web only connect using iframe](video.png)](https://www.youtube.com/watch?v=bvsTYZoTr54)
+
+
