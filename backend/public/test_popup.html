@@ -1,25 +1,51 @@
 <html>
 <head>
-    <title>VS SCORM - RTE Frameset</title>
-    <!-- Rev 1.0 - Sunday, May 31, 2009 -->
+    <title>SCORM Test Popup</title>
 	
       <script type="text/javascript">  
 
          function injectThis() {
             // The code you want to inject goes here
-            alert("hi!");
-         }
+            //alert("hi!");
+            document.addEventListener('click', (event) => {
+               console.log("click!");
+
+               let chk_condition = event && 
+                  event.target && 
+                  event.target.href && 
+                  event.target.href.includes("exam_completed");
+
+               if (chk_condition) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  window.parent.postMessage({message: 'The message is being set up here', hide: 'dbhchat', show: 'dbhchat'}, '*');
+                  //window.close();
+               };
+            });                  
+         };
+
+         window.addEventListener('message', event => {
+            // IMPORTANT: check the origin of the data! 
+            if ( true /*event.origin.startsWith('http://localhost:3002')*/) {
+                // The data was sent from your site.
+                // Data sent with postMessage is stored in event.data:
+                console.log(event.data);
+            } else {
+                // The data was NOT sent from your site! 
+                // Be careful! Do not use it. This else branch is
+                // here just for clarity, you usually shouldn't need it.
+                return;
+            }
+        });
 
 
-         function OpenNewWindow()  
-         {  
+         function OpenNewWindow()  {  
             let MyPath="http://localhost/training/content";
 			   var theWindow = window.open(MyPath,"","toolbar=no,status=no,menubar=no,location=center,scrollbars=no,resizable=no,height=700,width=900"); 
             let theDoc = theWindow.document;
             let theScript = document.createElement('script'); 
             theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
             theDoc.body.appendChild(theScript);
-            
          }  
       </script>  
 	  
