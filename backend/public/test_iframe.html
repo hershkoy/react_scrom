@@ -5,9 +5,20 @@
 
 <body style="margin:0px;padding:0px;overflow:hidden">
     <div id="result"></div>
-    <iframe id="myiframe" src="http://localhost/training/content" name="course" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
+    <input id="btn" type="button" value="Go to course" name="btnOpenPopup" onClick="OpenNewWindow()" />  
+    <iframe style="display:none;" id="myiframe" src="http://localhost/training/content" name="course" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
 
     <script type="text/javascript">  
+
+        const iframe = document.getElementById('myiframe');
+        const iframeWin = iframe.contentWindow || iframe;
+        const iframeDoc = iframe.contentDocument || iframeWin.document;    
+
+        function OpenNewWindow()  {  
+            iframe.style.display="block";
+            document.getElementById('result').innerHTML = "";
+            document.getElementById('btn').style.display="none";
+         }  
 
         function injectThis() {
             //alert("hi!");
@@ -47,9 +58,6 @@
             }
         });
 
-        const iframe = document.getElementById('myiframe');
-        const iframeWin = iframe.contentWindow || iframe;
-        const iframeDoc = iframe.contentDocument || iframeWin.document;
 
         var script = iframeDoc.createElement("script");
 
